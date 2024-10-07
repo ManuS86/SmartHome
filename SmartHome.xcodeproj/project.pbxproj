@@ -11,6 +11,11 @@
 		CE75F2252C8B1486001AD0A3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE75F2242C8B1486001AD0A3 /* ContentView.swift */; };
 		CE75F2272C8B1486001AD0A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE75F2262C8B1486001AD0A3 /* Assets.xcassets */; };
 		CE75F22A2C8B1486001AD0A3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE75F2292C8B1486001AD0A3 /* Preview Assets.xcassets */; };
+		DE480E862CB3EC6A002A71C6 /* RoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE480E852CB3EC6A002A71C6 /* RoomView.swift */; };
+		DE6AF8562CB3E20E0042E735 /* SmartHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6AF8552CB3E20E0042E735 /* SmartHomeView.swift */; };
+		DE6AF8582CB3E41E0042E735 /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6AF8572CB3E41E0042E735 /* Light.swift */; };
+		DE6AF85A2CB3E42D0042E735 /* Heating.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6AF8592CB3E42D0042E735 /* Heating.swift */; };
+		DE6AF85C2CB3E4380042E735 /* Door.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6AF85B2CB3E4380042E735 /* Door.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +24,11 @@
 		CE75F2242C8B1486001AD0A3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CE75F2262C8B1486001AD0A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE75F2292C8B1486001AD0A3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DE480E852CB3EC6A002A71C6 /* RoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomView.swift; sourceTree = "<group>"; };
+		DE6AF8552CB3E20E0042E735 /* SmartHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartHomeView.swift; sourceTree = "<group>"; };
+		DE6AF8572CB3E41E0042E735 /* Light.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
+		DE6AF8592CB3E42D0042E735 /* Heating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Heating.swift; sourceTree = "<group>"; };
+		DE6AF85B2CB3E4380042E735 /* Door.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Door.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +61,8 @@
 		CE75F2212C8B1486001AD0A3 /* SmartHome */ = {
 			isa = PBXGroup;
 			children = (
+				DE6AF8542CB3E0E90042E735 /* Views */,
+				DE6AF8532CB3E0D30042E735 /* Models */,
 				CE75F2222C8B1486001AD0A3 /* SmartHomeApp.swift */,
 				CE75F2242C8B1486001AD0A3 /* ContentView.swift */,
 				CE75F2262C8B1486001AD0A3 /* Assets.xcassets */,
@@ -65,6 +77,25 @@
 				CE75F2292C8B1486001AD0A3 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		DE6AF8532CB3E0D30042E735 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DE6AF8572CB3E41E0042E735 /* Light.swift */,
+				DE6AF8592CB3E42D0042E735 /* Heating.swift */,
+				DE6AF85B2CB3E4380042E735 /* Door.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DE6AF8542CB3E0E90042E735 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DE6AF8552CB3E20E0042E735 /* SmartHomeView.swift */,
+				DE480E852CB3EC6A002A71C6 /* RoomView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +168,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE6AF8562CB3E20E0042E735 /* SmartHomeView.swift in Sources */,
+				DE6AF85C2CB3E4380042E735 /* Door.swift in Sources */,
 				CE75F2252C8B1486001AD0A3 /* ContentView.swift in Sources */,
+				DE480E862CB3EC6A002A71C6 /* RoomView.swift in Sources */,
+				DE6AF85A2CB3E42D0042E735 /* Heating.swift in Sources */,
+				DE6AF8582CB3E41E0042E735 /* Light.swift in Sources */,
 				CE75F2232C8B1486001AD0A3 /* SmartHomeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
