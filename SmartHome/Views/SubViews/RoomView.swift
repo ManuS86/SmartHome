@@ -8,10 +8,20 @@
 import SwiftUI
 
 struct RoomView: View {
-    @State private var selectedRoom = Room(name: "Kitchen", imageString: "Room")
+    @Binding var selectedRoom: Room
     @Binding var previewOn: Bool
     @Binding var rooms: [Room]
     
+    init(previewOn: Binding<Bool>, rooms: Binding<[Room]>) {
+        self._previewOn = previewOn
+        self._rooms = rooms
+        if let room = rooms.first {
+            self._selectedRoom = room
+        } else {
+            self._selectedRoom = Binding(get: { Room(name: "Kitchen", imageString: "Kitchen") }, set: { _ in })
+        }
+    }
+        
     var body: some View {
         VStack {
             HStack {
@@ -20,13 +30,15 @@ struct RoomView: View {
                         Text(room.name).tag(room)
                     }
                 }
-                .padding(.top)
-                .padding(.horizontal)
+                .background(.white)
+                .padding()
                 
                 Image(systemName: "xmark")
+                    .padding(8)
+                    .background(.white)
+                    .padding(8)
+                    .padding(.trailing, 8)
                     .frame(maxWidth: .infinity, alignment: .topTrailing)
-                    .padding(.top)
-                    .padding(.horizontal)
                     .onTapGesture {
                         previewOn = false
                     }
@@ -49,14 +61,13 @@ struct RoomView: View {
                                         .font(.caption)
                                 }
                                 .padding()
+                                .frame(width: 130, height: 80)
                                 .background(.white)
                                 .clipShape(RoundedRectangle(cornerRadius: 12))
                                 .shadow(radius: 1, x: 1, y: 1)
                             }
                         }
-                    }
-                    .padding(.horizontal)
-                    .padding(.top)
+                    }.padding(.trailing, 8)
                     
                     HStack(spacing: 0) {
                         ForEach(selectedRoom.smartDevices) { device in
@@ -89,14 +100,14 @@ struct RoomView: View {
                                         .font(.caption)
                                 }
                                 .padding()
+                                .frame(width: 130, height: 80)
                                 .background(.white)
                                 .clipShape(RoundedRectangle(cornerRadius: 12))
                                 .shadow(radius: 1, x: 1, y: 1)
                             }
                         }
                     }
-                    .padding(.top)
-                }
+                }.padding(.bottom, 8)
                 
                 GridRow {
                     HStack(spacing: 0) {
@@ -130,12 +141,13 @@ struct RoomView: View {
                                         .font(.caption)
                                 }
                                 .padding()
+                                .frame(width: 130, height: 80)
                                 .background(.white)
                                 .clipShape(RoundedRectangle(cornerRadius: 12))
                                 .shadow(radius: 1, x: 1, y: 1)
                             }
                         }
-                    }.padding()
+                    }.padding(.trailing, 8)
                     
                     
                     HStack {
@@ -153,17 +165,18 @@ struct RoomView: View {
                                         .font(.caption)
                                 }
                                 .padding()
+                                .frame(width: 130, height: 80)
                                 .background(.white)
                                 .clipShape(RoundedRectangle(cornerRadius: 12))
                                 .shadow(radius: 1, x: 1, y: 1)
                             }
                         }
-                    }.padding(.horizontal)
-                        .padding(.bottom)
+                    }
                 }
             }
+            .padding(.bottom)
         }.frame(maxWidth: .infinity)
-            .background(Image(selectedRoom.imageString))
+            .background(selectedRoom.image.resizable().scaledToFill())
             .cornerRadius(12)
             .shadow(radius: 2, x: 1, y: 1)
     }
@@ -172,6 +185,6 @@ struct RoomView: View {
 #Preview {
     RoomView(
         previewOn: .constant(true),
-        rooms: .constant([Room(name: "Kitchen", imageString: "Room")])
+        rooms: .constant([Room(name: "Kitchen", imageString: "Kitchen")])
     )
 }

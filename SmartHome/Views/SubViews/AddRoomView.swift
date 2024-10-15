@@ -19,12 +19,14 @@ struct AddRoomView: View {
         HStack {
             TextField("Enter room name", text: $inputText)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-            PhotosPicker("+ \(Image(systemName: "photo"))", selection: $imageItem, matching: .images)
-            Button(action: { rooms.append(Room(name: inputText, imageString: imageString?.description ?? "")) }) {
-                Text("Add")
-            }
-            .buttonStyle(BorderedProminentButtonStyle())
+            PhotosPicker("\(Image(systemName: "photo"))", selection: $imageItem, matching: .images)
         }
+        
+        Button(action: { rooms.append(Room(name: inputText, imageString: imageString?.description ?? "")) }) {
+            Text("Add")
+                .frame(width: 200)
+        }
+        .buttonStyle(BorderedProminentButtonStyle())
     }
 }
 
@@ -32,9 +34,6 @@ struct AddRoomView: View {
 #Preview {
     AddRoomView(
         smartDevices: .constant([
-        SmartDevice(name: "Living room", type: .light),
-        SmartDevice(name: "Living room", type: .ac),
-        SmartDevice(name: "Heater", type: .thermostat),
         SmartDevice(name: "Main door", type: .lock)
     ]),
         rooms: .constant([Room(name: "Kitchen", imageString: "Room")])

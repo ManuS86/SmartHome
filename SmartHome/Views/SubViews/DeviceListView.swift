@@ -13,7 +13,7 @@ struct DeviceListView: View {
     var body: some View {
         List {
             Section("Lights") {
-                ForEach($smartDevices) { device in
+                ForEach($smartDevices.reversed()) { device in
                     if device.wrappedValue.type == .light {
                         SmartDeviceView(smartDevice: device)
                     }
@@ -23,7 +23,7 @@ struct DeviceListView: View {
             }
             
             Section("Air Conditioners") {
-                ForEach($smartDevices) { device in
+                ForEach($smartDevices.reversed()) { device in
                     if device.wrappedValue.type == .ac {
                         SmartDeviceView(smartDevice: device)
                     }
@@ -33,7 +33,7 @@ struct DeviceListView: View {
             }
             
             Section("Heaters") {
-                ForEach($smartDevices) { device in
+                ForEach($smartDevices.reversed()) { device in
                     if device.wrappedValue.type == .thermostat {
                         SmartDeviceView(smartDevice: device)
                     }
@@ -43,7 +43,7 @@ struct DeviceListView: View {
             }
             
             Section("Locks") {
-                ForEach($smartDevices) { device in
+                ForEach($smartDevices.reversed()) { device in
                     if device.wrappedValue.type == .lock {
                         SmartDeviceView(smartDevice: device)
                     }

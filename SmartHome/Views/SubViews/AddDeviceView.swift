@@ -10,9 +10,19 @@ import SwiftUI
 struct AddDeviceView: View {
     @State private var inputText = ""
     @State private var selectedDeviceType = DeviceType.light
-    @State private var selectedRoom = Room(name: "Kitchen", imageString: "Room")
+    @Binding var selectedRoom: Room
     @Binding var smartDevices: [SmartDevice]
     @Binding var rooms: [Room]
+    
+    init(smartDevices: Binding<[SmartDevice]>, rooms: Binding<[Room]>) {
+        self._smartDevices = smartDevices
+        self._rooms = rooms
+        if let room = rooms.first {
+            self._selectedRoom = room
+        } else {
+            self._selectedRoom = Binding(get: { Room(name: "Kitchen", imageString: "Kitchen") }, set: { _ in })
+        }
+    }
     
     var body: some View {
         VStack {
@@ -40,8 +50,9 @@ struct AddDeviceView: View {
         }
         
         Button(action: {
-            selectedRoom.smartDevices.append(SmartDevice(name: inputText, type: selectedDeviceType))
-            smartDevices.append(SmartDevice(name: inputText, type: selectedDeviceType))
+            let device = SmartDevice(name: inputText, type: selectedDeviceType)
+            selectedRoom.smartDevices.append(device)
+            smartDevices.append(device)
         }) {
             Text("Add")
                 .frame(width: 200)

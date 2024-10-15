@@ -19,12 +19,12 @@ struct SmartHomeView: View {
         Room(
             name: "Kitchen",
             smartDevices: [
-            SmartDevice(name: "Kitchen", type: .light),
-            SmartDevice(name: "Living room", type: .ac),
-            SmartDevice(name: "Main door", type: .lock),
-            SmartDevice(name: "Bed room", type: .thermostat)
-        ],
-             imageString: "Room")
+                SmartDevice(name: "Main", type: .light),
+                SmartDevice(name: "AC", type: .ac),
+                SmartDevice(name: "Terrace", type: .lock),
+                SmartDevice(name: "Heater", type: .thermostat)
+            ],
+            imageString: "Kitchen")
     ]
     
     var body: some View {
@@ -47,7 +47,9 @@ struct SmartHomeView: View {
             }.frame(maxWidth: .infinity)
             
             AddRoomView(smartDevices: $smartDevices, rooms: $rooms)
-        }.padding()
+        }
+        .padding(.horizontal)
+        .padding(.top)
     }
 }
 

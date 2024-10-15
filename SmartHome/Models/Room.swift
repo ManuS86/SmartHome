@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct Room: Hashable {
+struct Room: Hashable, Identifiable {
+    var id = UUID()
     var name: String
     var smartDevices: [SmartDevice] = []
     var imageString: String
