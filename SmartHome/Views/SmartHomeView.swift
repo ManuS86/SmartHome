@@ -8,13 +8,23 @@
 import SwiftUI
 
 struct SmartHomeView: View {
-    @State private var inputText = ""
     @State private var previewOn = true
-    @State private var selectedDeviceType = DeviceType.light
     @State private var smartDevices = [
-        SmartDevice(name: "Living room", type: .light),
+        SmartDevice(name: "Kitchen", type: .light),
+        SmartDevice(name: "Living room", type: .ac),
         SmartDevice(name: "Main door", type: .lock),
         SmartDevice(name: "Bed room", type: .thermostat)
+    ]
+    @State private var rooms = [
+        Room(
+            name: "Kitchen",
+            smartDevices: [
+            SmartDevice(name: "Kitchen", type: .light),
+            SmartDevice(name: "Living room", type: .ac),
+            SmartDevice(name: "Main door", type: .lock),
+            SmartDevice(name: "Bed room", type: .thermostat)
+        ],
+             imageString: "Room")
     ]
     
     var body: some View {
@@ -23,71 +33,21 @@ struct SmartHomeView: View {
                 .font(.title)
                 .bold()
             
-            HStack {
-                TextField("Enter device name", text: $inputText)
-                    .padding(8)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding(.bottom, 8)
-                
-                Picker("Device Type", selection: $selectedDeviceType) {
-                    ForEach(DeviceType.allCases) { deviceType in
-                        Image(systemName: deviceType.image).tag(deviceType)
-                    }
-                }
-            }
-            
-            Button(action: {
-                smartDevices.append(SmartDevice(name: inputText, type: selectedDeviceType))
-            }) {
-                Text("Add")
-                    .frame(width: 240)
-            }
-            .buttonStyle(BorderedProminentButtonStyle())
-            
-            List {
-                ForEach($smartDevices) { device in
-                    if device.wrappedValue.type == .light {
-                        SmartDeviceView(device: device)
-                    }
-                }
-                .onDelete(perform: removeItem)
-                .listRowInsets(EdgeInsets(top: 8, leading: 2, bottom: 8, trailing: 2))
-                
-                ForEach($smartDevices) { device in
-                    if device.wrappedValue.type == .thermostat {
-                        SmartDeviceView(device: device)
-                    }
-                }
-                .onDelete(perform: removeItem)
-                .listRowInsets(EdgeInsets(top: 8, leading: 2, bottom: 8, trailing: 2))
-                
-                ForEach($smartDevices) { device in
-                    if device.wrappedValue.type == .lock {
-                        SmartDeviceView(device: device)
-                    }
-                }
-                .onDelete(perform: removeItem)
-                .listRowInsets(EdgeInsets(top: 8, leading: 2, bottom: 8, trailing: 2))
-            }
-            .listStyle(.plain)
+            AddDeviceView(smartDevices: $smartDevices, rooms: $rooms)
+            DeviceListView(smartDevices: $smartDevices)
             
             VStack {
                 if previewOn {
-                    RoomView(previewOn: $previewOn, devices: $smartDevices)
+                    RoomView(previewOn: $previewOn, rooms: $rooms)
                 }
                 
                 Toggle("Display room preview", isOn: $previewOn)
                     .tint(.blue)
-                    .padding(.horizontal)
-                    .padding(.top, 8)
-            }
-            .frame(maxWidth: .infinity)
-        }
-        .padding()
-    }
-    
-    func removeItem(indexSet: IndexSet) {
-        smartDevices.remove(atOffsets: indexSet)
+                    .padding(8)
+            }.frame(maxWidth: .infinity)
+            
+            AddRoomView(smartDevices: $smartDevices, rooms: $rooms)
+        }.padding()
     }
 }
 

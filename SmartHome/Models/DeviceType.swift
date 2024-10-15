@@ -9,6 +9,7 @@ import Foundation
 
 enum DeviceType: String, CaseIterable, Identifiable {
     case light = "Light"
+    case ac = "Air Conditioner"
     case thermostat = "Thermostat"
     case lock = "Lock"
     
@@ -17,6 +18,7 @@ enum DeviceType: String, CaseIterable, Identifiable {
     var image: String {
         switch self {
         case .light: return "lightbulb"
+        case .ac: return "air.conditioner.horizontal.fill"
         case .thermostat: return "thermometer"
         case .lock: return "lock.fill"
         }
@@ -25,6 +27,7 @@ enum DeviceType: String, CaseIterable, Identifiable {
     var image2: String {
         switch self {
         case .light: return "lightbulb.min"
+        case .ac: return "air.conditioner.horizontal"
         case .thermostat: return "thermometer.medium.slash"
         case .lock: return "lock.open.fill"
         }

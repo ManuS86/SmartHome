@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SmartDevice: Identifiable {
+struct SmartDevice: Identifiable, Hashable {
     let id = UUID()
     var name: String
     var type: DeviceType
