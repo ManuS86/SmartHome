@@ -9,12 +9,6 @@ import SwiftUI
 
 struct SmartHomeView: View {
     @State private var previewOn = true
-    @State private var smartDevices = [
-        SmartDevice(name: "Kitchen", type: .light),
-        SmartDevice(name: "Living room", type: .ac),
-        SmartDevice(name: "Main door", type: .lock),
-        SmartDevice(name: "Bed room", type: .thermostat)
-    ]
     @State private var rooms = [
         Room(
             name: "Kitchen",
@@ -24,7 +18,8 @@ struct SmartHomeView: View {
                 SmartDevice(name: "Terrace", type: .lock),
                 SmartDevice(name: "Heater", type: .thermostat)
             ],
-            imageString: "Kitchen")
+            imageString: "Kitchen"),
+        Room(name: "Mobile", smartDevices: [], imageString: "")
     ]
     
     var body: some View {
@@ -33,8 +28,8 @@ struct SmartHomeView: View {
                 .font(.title)
                 .bold()
             
-            AddDeviceView(smartDevices: $smartDevices, rooms: $rooms)
-            DeviceListView(smartDevices: $smartDevices)
+            AddDeviceView(rooms: $rooms)
+            DeviceListView(rooms: $rooms)
             
             VStack {
                 if previewOn {
@@ -46,7 +41,7 @@ struct SmartHomeView: View {
                     .padding(8)
             }.frame(maxWidth: .infinity)
             
-            AddRoomView(smartDevices: $smartDevices, rooms: $rooms)
+            AddRoomView(rooms: $rooms)
         }
         .padding(.horizontal)
         .padding(.top)

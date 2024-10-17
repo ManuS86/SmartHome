@@ -13,7 +13,7 @@
 		DE480E862CB3EC6A002A71C6 /* RoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE480E852CB3EC6A002A71C6 /* RoomView.swift */; };
 		DE480ED82CB561B3002A71C6 /* DeviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE480ED72CB561B3002A71C6 /* DeviceType.swift */; };
 		DE480EDA2CB5626E002A71C6 /* SmartDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE480ED92CB56266002A71C6 /* SmartDevice.swift */; };
-		DE480EDC2CB7F384002A71C6 /* SmartDeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE480EDB2CB7F384002A71C6 /* SmartDeviceView.swift */; };
+		DE480EDC2CB7F384002A71C6 /* DeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE480EDB2CB7F384002A71C6 /* DeviceView.swift */; };
 		DE480EE02CB8334B002A71C6 /* DeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE480EDF2CB8334B002A71C6 /* DeviceListView.swift */; };
 		DE480EE22CB83C89002A71C6 /* AddDeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE480EE12CB83C89002A71C6 /* AddDeviceView.swift */; };
 		DE480F032CB95638002A71C6 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE480F022CB95638002A71C6 /* Room.swift */; };
@@ -29,7 +29,7 @@
 		DE480E852CB3EC6A002A71C6 /* RoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomView.swift; sourceTree = "<group>"; };
 		DE480ED72CB561B3002A71C6 /* DeviceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceType.swift; sourceTree = "<group>"; };
 		DE480ED92CB56266002A71C6 /* SmartDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartDevice.swift; sourceTree = "<group>"; };
-		DE480EDB2CB7F384002A71C6 /* SmartDeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartDeviceView.swift; sourceTree = "<group>"; };
+		DE480EDB2CB7F384002A71C6 /* DeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceView.swift; sourceTree = "<group>"; };
 		DE480EDF2CB8334B002A71C6 /* DeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListView.swift; sourceTree = "<group>"; };
 		DE480EE12CB83C89002A71C6 /* AddDeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDeviceView.swift; sourceTree = "<group>"; };
 		DE480F022CB95638002A71C6 /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
@@ -89,9 +89,9 @@
 			children = (
 				DE480EE12CB83C89002A71C6 /* AddDeviceView.swift */,
 				DE480F042CB95DEC002A71C6 /* AddRoomView.swift */,
+				DE480EDB2CB7F384002A71C6 /* DeviceView.swift */,
 				DE480EDF2CB8334B002A71C6 /* DeviceListView.swift */,
 				DE480E852CB3EC6A002A71C6 /* RoomView.swift */,
-				DE480EDB2CB7F384002A71C6 /* SmartDeviceView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -193,7 +193,7 @@
 				DE480F052CB95DEC002A71C6 /* AddRoomView.swift in Sources */,
 				DE480F032CB95638002A71C6 /* Room.swift in Sources */,
 				DE480ED82CB561B3002A71C6 /* DeviceType.swift in Sources */,
-				DE480EDC2CB7F384002A71C6 /* SmartDeviceView.swift in Sources */,
+				DE480EDC2CB7F384002A71C6 /* DeviceView.swift in Sources */,
 				CE75F2232C8B1486001AD0A3 /* SmartHomeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

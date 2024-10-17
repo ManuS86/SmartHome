@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct SmartDeviceView: View {
+struct DeviceView: View {
     @State var inputText: String = ""
     @Binding var smartDevice: SmartDevice
     
     var body: some View {
-        HStack {
+        HStack(spacing: 0) {
             if (smartDevice.isLocked == true && smartDevice.type == .lock) || (smartDevice.isOn == false && smartDevice.type == .light) || (smartDevice.temperature != 0 && (smartDevice.type == .thermostat || smartDevice.type == .ac)) {
                 Image(systemName: smartDevice.type.image)
                     .imageScale(.large)
@@ -103,22 +103,24 @@ struct SmartDeviceView: View {
             }
             
             if smartDevice.type == .lock {
-                Text(smartDevice.name)
-                Spacer()
-                if smartDevice.isLocked {
-                    Button(action: { smartDevice.isLocked = false }) {
-                        Text("Locked")
-                            .frame(width: 72)
+                HStack(spacing: 0) {
+                    Text(smartDevice.name)
+                    Spacer()
+                    if smartDevice.isLocked {
+                        Button(action: { smartDevice.isLocked = false }) {
+                            Text("Locked")
+                                .frame(width: 72)
+                        }
+                        .buttonStyle(BorderedProminentButtonStyle())
+                        .tint(.red)
                     }
-                    .buttonStyle(BorderedProminentButtonStyle())
-                    .tint(.red)
-                }
-                if !smartDevice.isLocked {
-                    Button(action: { smartDevice.isLocked = true }) {
-                        Text("Unlocked")
-                            .frame(width: 72)
+                    if !smartDevice.isLocked {
+                        Button(action: { smartDevice.isLocked = true }) {
+                            Text("Unlocked")
+                                .frame(width: 72)
+                        }
+                        .buttonStyle(BorderedProminentButtonStyle())
                     }
-                    .buttonStyle(BorderedProminentButtonStyle())
                 }
             }
         }.padding(.vertical)
@@ -126,12 +128,11 @@ struct SmartDeviceView: View {
         .onAppear {
             inputText = String(format: "%.0f", smartDevice.temperature)
         }
-
     }
 }
 
 #Preview {
-   SmartDeviceView(smartDevice:.constant(
-    SmartDevice(name: "Living room", type: .ac)
+   DeviceView(smartDevice:.constant(
+    SmartDevice(name: "Living room", type: .lock)
    ))
 }

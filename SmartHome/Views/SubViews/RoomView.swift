@@ -8,26 +8,16 @@
 import SwiftUI
 
 struct RoomView: View {
-    @Binding var selectedRoom: Room
     @Binding var previewOn: Bool
     @Binding var rooms: [Room]
-    
-    init(previewOn: Binding<Bool>, rooms: Binding<[Room]>) {
-        self._previewOn = previewOn
-        self._rooms = rooms
-        if let room = rooms.first {
-            self._selectedRoom = room
-        } else {
-            self._selectedRoom = Binding(get: { Room(name: "Kitchen", imageString: "Kitchen") }, set: { _ in })
-        }
-    }
+    @State var currentIndex = 0
         
     var body: some View {
         VStack {
             HStack {
-                Picker("Room Selection", selection: $selectedRoom) {
-                    ForEach(rooms, id: \.self) { room in
-                        Text(room.name).tag(room)
+                Picker("Room Selection", selection: $currentIndex) {
+                    ForEach(Array(rooms.enumerated()), id: \.element) { index, room in
+                        Text(rooms[index].name).tag(index)
                     }
                 }
                 .background(.white)
@@ -47,17 +37,22 @@ struct RoomView: View {
             Grid {
                 GridRow {
                     HStack {
-                        ForEach(selectedRoom.smartDevices) { device in
+                        ForEach(rooms[currentIndex].smartDevices) { device in
                             if device.type == .light {
                                 VStack {
                                     if device.isOn {
                                         Image(systemName: device.type.image2)
                                             .imageScale(.large)
+                                            .onTapGesture {
+
+                                            }
                                     } else {
                                         Image(systemName: device.type.image)
                                             .imageScale(.large)
+                                            .onTapGesture {
+                                            }
                                     }
-                                    Text(device.name)
+                                        Text(device.name)
                                         .font(.caption)
                                 }
                                 .padding()
@@ -70,7 +65,7 @@ struct RoomView: View {
                     }.padding(.trailing, 8)
                     
                     HStack(spacing: 0) {
-                        ForEach(selectedRoom.smartDevices) { device in
+                        ForEach(rooms[currentIndex].smartDevices) { device in
                             if device.type == .ac {
                                 VStack {
                                     HStack {
@@ -111,7 +106,7 @@ struct RoomView: View {
                 
                 GridRow {
                     HStack(spacing: 0) {
-                        ForEach(selectedRoom.smartDevices) { device in
+                        ForEach(rooms[currentIndex].smartDevices) { device in
                             if device.type == .thermostat {
                                 VStack {
                                     HStack {
@@ -151,7 +146,7 @@ struct RoomView: View {
                     
                     
                     HStack {
-                        ForEach(selectedRoom.smartDevices) { device in
+                        ForEach(rooms[currentIndex].smartDevices) { device in
                             if device.type == .lock {
                                 VStack {
                                     if device.isLocked {
@@ -176,7 +171,7 @@ struct RoomView: View {
             }
             .padding(.bottom)
         }.frame(maxWidth: .infinity)
-            .background(selectedRoom.image.resizable().scaledToFill())
+            .background(rooms[currentIndex].image.resizable().scaledToFill())
             .cornerRadius(12)
             .shadow(radius: 2, x: 1, y: 1)
     }

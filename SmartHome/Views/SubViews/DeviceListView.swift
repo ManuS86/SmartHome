@@ -8,64 +8,38 @@
 import SwiftUI
 
 struct DeviceListView: View {
-    @Binding var smartDevices: [SmartDevice]
+    @Binding var rooms: [Room]
     
     var body: some View {
         List {
-            Section("Lights") {
-                ForEach($smartDevices.reversed()) { device in
-                    if device.wrappedValue.type == .light {
-                        SmartDeviceView(smartDevice: device)
+            ForEach($rooms) { room in
+                Section(room.wrappedValue.name) {
+                    ForEach(room.smartDevices) { device in
+                        DeviceView(smartDevice: device)
                     }
-                }
-                .onDelete(perform: removeItem)
-                .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
-            }
-            
-            Section("Air Conditioners") {
-                ForEach($smartDevices.reversed()) { device in
-                    if device.wrappedValue.type == .ac {
-                        SmartDeviceView(smartDevice: device)
+                    .onDelete { offset in
+                        room.wrappedValue.smartDevices.remove(atOffsets: offset)
                     }
+                    .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
                 }
-                .onDelete(perform: removeItem)
-                .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
-            }
-            
-            Section("Heaters") {
-                ForEach($smartDevices.reversed()) { device in
-                    if device.wrappedValue.type == .thermostat {
-                        SmartDeviceView(smartDevice: device)
-                    }
-                }
-                .onDelete(perform: removeItem)
-                .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
-            }
-            
-            Section("Locks") {
-                ForEach($smartDevices.reversed()) { device in
-                    if device.wrappedValue.type == .lock {
-                        SmartDeviceView(smartDevice: device)
-                    }
-                }
-                .onDelete(perform: removeItem)
-                .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
             }
         }
         .listStyle(.plain)
         .padding(.vertical, 8)
     }
-    
-    func removeItem(indexSet: IndexSet) {
-        smartDevices.remove(atOffsets: indexSet)
-    }
 }
 
 #Preview {
-    DeviceListView(smartDevices: .constant([
-        SmartDevice(name: "Living room light", type: .light),
-        SmartDevice(name: "Living room light", type: .ac),
-        SmartDevice(name: "Radiator", type: .thermostat),
-        SmartDevice(name: "Main door", type: .lock)
+    DeviceListView(rooms: .constant([
+        Room(
+            name: "Kitchen",
+            smartDevices: [
+                SmartDevice(name: "Main", type: .light),
+                SmartDevice(name: "AC", type: .ac),
+                SmartDevice(name: "Terrace", type: .lock),
+                SmartDevice(name: "Heater", type: .thermostat)
+            ],
+            imageString: "Kitchen"),
+        Room(name: "Mobile", smartDevices: [], imageString: "")
     ]))
 }
