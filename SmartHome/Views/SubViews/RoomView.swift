@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct RoomView: View {
+    @State var currentIndex = 0
     @Binding var previewOn: Bool
     @Binding var rooms: [Room]
-    @State var currentIndex = 0
-        
+    
     var body: some View {
         VStack {
             HStack {
@@ -43,16 +43,14 @@ struct RoomView: View {
                                     if device.isOn {
                                         Image(systemName: device.type.image2)
                                             .imageScale(.large)
-                                            .onTapGesture {
-
-                                            }
+                                            .padding(.bottom, 4)
                                     } else {
                                         Image(systemName: device.type.image)
                                             .imageScale(.large)
-                                            .onTapGesture {
-                                            }
+                                            .padding(.bottom, 4)
                                     }
-                                        Text(device.name)
+                                    
+                                    Text(device.name)
                                         .font(.caption)
                                 }
                                 .padding()
@@ -60,6 +58,11 @@ struct RoomView: View {
                                 .background(.white)
                                 .clipShape(RoundedRectangle(cornerRadius: 12))
                                 .shadow(radius: 1, x: 1, y: 1)
+                                .onTapGesture {
+                                    if let searchIndex = rooms[currentIndex].smartDevices.firstIndex(of: device) {
+                                        rooms[currentIndex].smartDevices[searchIndex].isOn.toggle()
+                                    }
+                                }
                             }
                         }
                     }.padding(.trailing, 8)
@@ -90,7 +93,8 @@ struct RoomView: View {
                                                 .font(.caption)
                                                 .frame(maxHeight: 20, alignment: .top)
                                         }
-                                    }
+                                    }.padding(.bottom, 4)
+                                    
                                     Text(device.name)
                                         .font(.caption)
                                 }
@@ -99,6 +103,15 @@ struct RoomView: View {
                                 .background(.white)
                                 .clipShape(RoundedRectangle(cornerRadius: 12))
                                 .shadow(radius: 1, x: 1, y: 1)
+                                .onTapGesture {
+                                    if let searchIndex = rooms[currentIndex].smartDevices.firstIndex(of: device) {
+                                        if device.temperature == 0 {
+                                            rooms[currentIndex].smartDevices[searchIndex].temperature = 20.0
+                                        } else {
+                                            rooms[currentIndex].smartDevices[searchIndex].temperature = 0.0
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -124,6 +137,7 @@ struct RoomView: View {
                                             Image(systemName: device.type.image2)
                                                 .imageScale(.large)
                                                 .padding(.trailing, 8)
+                                        
                                             Text(String(format: "%.0f", device.temperature))
                                                 .font(.title2)
                                                 .padding(.trailing, 2)
@@ -131,7 +145,8 @@ struct RoomView: View {
                                                 .font(.caption)
                                                 .frame(maxHeight: 20, alignment: .top)
                                         }
-                                    }
+                                    }.padding(.bottom, 4)
+                                    
                                     Text(device.name)
                                         .font(.caption)
                                 }
@@ -140,6 +155,15 @@ struct RoomView: View {
                                 .background(.white)
                                 .clipShape(RoundedRectangle(cornerRadius: 12))
                                 .shadow(radius: 1, x: 1, y: 1)
+                                .onTapGesture {
+                                    if let searchIndex = rooms[currentIndex].smartDevices.firstIndex(of: device) {
+                                        if device.temperature == 0 {
+                                            rooms[currentIndex].smartDevices[searchIndex].temperature = 20.0
+                                        } else {
+                                            rooms[currentIndex].smartDevices[searchIndex].temperature = 0.0
+                                        }
+                                    }
+                                }
                             }
                         }
                     }.padding(.trailing, 8)
@@ -152,10 +176,14 @@ struct RoomView: View {
                                     if device.isLocked {
                                         Image(systemName: device.type.image)
                                             .imageScale(.large)
+                                            .padding(.bottom, 4)
+                                        
                                     } else {
                                         Image(systemName: device.type.image2)
                                             .imageScale(.large)
+                                            .padding(.bottom, 4)
                                     }
+                                    
                                     Text(device.name)
                                         .font(.caption)
                                 }
@@ -164,6 +192,11 @@ struct RoomView: View {
                                 .background(.white)
                                 .clipShape(RoundedRectangle(cornerRadius: 12))
                                 .shadow(radius: 1, x: 1, y: 1)
+                                .onTapGesture {
+                                    if let searchIndex = rooms[currentIndex].smartDevices.firstIndex(of: device) {
+                                        rooms[currentIndex].smartDevices[searchIndex].isLocked.toggle()
+                                    }
+                                }
                             }
                         }
                     }
